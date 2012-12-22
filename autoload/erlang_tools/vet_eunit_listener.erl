@@ -44,8 +44,7 @@ handle_begin(test, Data, State = #state{sources=Sources}) ->
             State#state{sources=Sources2}
     end.
 
-handle_end(group, Data, State = #state{log=Log}) ->
-    vet_io:write(Log, Data),
+handle_end(group, _Data, State) ->
     State;
 handle_end(test, Data, State) ->
     case lists:keyfind(status, 1, Data) of
@@ -57,8 +56,7 @@ handle_end(test, Data, State) ->
             handle_error(failed, Reason, Data, State)
     end.
 
-handle_cancel(group, Data, State = #state{log=Log}) ->
-    vet_io:write(Log, Data),
+handle_cancel(group, _Data, State) ->
     State;
 handle_cancel(test, Data, State) ->
     {reason, Reason} = lists:keyfind(reason, 1, Data),
