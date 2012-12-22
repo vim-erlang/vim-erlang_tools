@@ -40,8 +40,10 @@ beam_lookup(Beam, Chunk, Key) when is_atom(Beam) ->
 beam_lookup(Beam, Chunk, Key) ->
     File = where_is_file(Beam),
     case beam_lib:chunks(File, [Chunk]) of
-        {ok, {_, [{Chunk, Result}]}} ->
+        {ok, {_, [{Chunk, Result}]}} when is_list(Result) ->
             lists:keyfind(Key, 1, Result);
+        {ok, {_, [{Chunk, {Key, Value}}]}} ->
+            {Key, Value};
         _ ->
             error
     end.

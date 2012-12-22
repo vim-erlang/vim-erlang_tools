@@ -35,7 +35,7 @@ endfunction " 1}}}
 function erlang_tools#ct_run#opts(opts) " {{{1
     let opts = '-pa '. fnameescape(g:erlang_tools#ct_run#dir)
     let opts .= ' ' . erlang_tools#utils#opts('ct_run', a:opts)
-    let ct_hook = g:erlang_tools#ct_run#ct_hook
+    let ct_hook = g:erlang_tools#ct_run#vet_cth
     if empty(matchstr(opts, '-ct_hooks'))
         let opts = '-ct_hooks ' . ct_hook  . ' [] ' . opts
     else
