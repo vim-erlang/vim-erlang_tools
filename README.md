@@ -1,1 +1,1 @@
-Depreciated!
+Deprecated!
